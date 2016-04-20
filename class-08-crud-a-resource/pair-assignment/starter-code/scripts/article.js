@@ -88,7 +88,7 @@
     });
   };
 
-  // TODO: Refactor the .fetchAll() method to check if the database holds any records or not.
+  // DONE: Refactor the .fetchAll() method to check if the database holds any records or not.
 
   // If the DB has data already, we'll load up the data (by descended published order), and then hand off control to the View.
   // If the DB is empty, we need to retrieve the JSON and process it.
