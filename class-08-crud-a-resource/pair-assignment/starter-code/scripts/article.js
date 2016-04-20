@@ -47,12 +47,12 @@
     );
   };
 
-  // TODO: Delete an article instance from the database:
+  // DONE: Delete an article instance from the database:
   Article.prototype.deleteRecord = function(callback) {
     webDB.execute(
       [
         {
-          'sql': '...;',
+          'sql': 'DELETE FROM articles WHERE id = ?',
           'data': [this.id]
         }
       ],
@@ -60,12 +60,12 @@
     );
   };
 
-  // TODO: Update an article instance, overwriting it's properties into the corresponding record in the database:
+  // DONE: Update an article instance, overwriting it's properties into the corresponding record in the database:
   Article.prototype.updateRecord = function(callback) {
     webDB.execute(
       [
         {
-          'sql': '...;',
+          'sql': 'UPDATE articles SET title = ?, author = ?, author_url = ?, category = ?, published_on = ?, body = ? WHERE id = ? ',
           'data': [this.title, this.author, this.authorUrl, this.category, this.publishedOn, this.body, this.id]
         }
       ],
@@ -73,10 +73,10 @@
     );
   };
 
-  // TODO: Use correct SQL syntax to delete all records from the articles table.
+  // DONE: Use correct SQL syntax to delete all records from the articles table.
   Article.truncateTable = function(callback) {
     webDB.execute(
-      'DELETE ...;', // <----finish the command here, inside the quotes.
+      'DELETE FROM articles', // <----finish the command here, inside the quotes.
       callback
     );
   };
