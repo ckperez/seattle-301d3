@@ -13,6 +13,8 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  //This method will compile Handlebar templates for the author filter and the category filter/select elements.
+  //The execution path is:  this method is called in articleView.index, which is called by articlesController.index (in routes.js) on initial page load.
   articleView.populateFilters = function() {
     var options,
       template = Handlebars.compile($('#option-template').text());
@@ -38,6 +40,10 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  //This method grabs the filters id with jQ and runs a function on the select element through event delegation
+  //the function run on the select el cuts '-filter' off the end of the id of the select el, saves the shortened id as 'resource', and passes that off to page.js
+  //Page.js creates a new route with the resource variable and the value of the selected option, replacing white spaces with +
+  //Execution path: called in articleView.index, which is called in articlesController.index, which is called by page() in routes.js when one of the selects is changed and sets a new path.
   articleView.handleFilters = function() {
     $('#filters').one('change', 'select', function() {
       resource = this.id.replace('-filter', '');
@@ -118,6 +124,12 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  //First: grabs el with #articles using jQ, shows them, hides siblings.
+  //Next: grabs article el within #articles el and removes them.
+  //Next: for each article passed into articleView.index, it will render the article using the helper function in this module and append to the #articles el.
+  //Next: calls the two methods commmented on above to populate the filters and handle changes to the selects.
+  //Next: uses an if block to hide parts of the body of the article.
+  //Execution path: this method is called articlesController.index, which is called as the second callback in several page.js functions in routes.js 
   articleView.index = function(articles) {
     $('#articles').show().siblings().hide();
 
@@ -128,6 +140,7 @@
 
     articleView.populateFilters();
     // COMMENT: What does this method do?  What is it's execution path?
+    //See line 43
     articleView.handleFilters();
 
     // DONE: Replace setTeasers with just the truncation logic, if needed:
